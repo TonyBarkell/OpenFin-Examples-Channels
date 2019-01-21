@@ -1,0 +1,24 @@
+{
+    "devtools_port": 9090,
+    "startup_app": {
+        "url": "http://localhost:8080/client/index.html",
+        "name": "Channel API Client",
+        "uuid": "channel-api-client",
+        "frame": false,
+        "autoShow": true,
+        "defaultWidth": 500,
+        "defaultHeight": 200,
+        "saveWindowState": false,
+        "applicationIcon": "http://localhost:8080/client/favicon.ico",
+        "cornerRounding": {
+            "height": 7,
+            "width": 7
+        }
+    },
+    "runtime": {
+        "version": "stable"
+    },
+    "shortcut": {
+        "icon": "http://localhost:8080/client/favicon.ico"
+    }
+}
