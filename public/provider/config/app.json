@@ -1,7 +1,7 @@
 {
     "devtools_port": 9090,
     "startup_app": {
-        "url": "http://localhost:8080/provider/index.html",
+        "url": "http://localhost:8000/provider/index.html",
         "name": "Channel API Provider",
         "uuid": "channel-api-provider",
         "frame": false,
@@ -9,7 +9,7 @@
         "defaultWidth": 500,
         "defaultHeight": 200,
         "saveWindowState": false,
-        "applicationIcon": "http://localhost:8080/provider/favicon.ico",
+        "applicationIcon": "http://localhost:8000/provider/favicon.ico",
         "cornerRounding": {
             "height": 7,
             "width": 7
@@ -19,6 +19,6 @@
         "version": "stable"
     },
     "shortcut": {
-        "icon": "http://localhost:8080/provider/favicon.ico"
+        "icon": "http://localhost:8000/provider/favicon.ico"
     }
 }

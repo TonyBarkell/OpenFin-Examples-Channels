@@ -64,10 +64,35 @@ async function launchProvider(){
 
 async function launchClient(){
     var manifestBase = await baseManifestUrl();
-    console.log(manifestBase);
-    fin.desktop.Application.createFromManifest(manifestBase + "/client/config/app.json", function(app) {
-        app.run();
-      }, function(error) {
-        console.error('Failed to create app from manifest: ', error);
-      });
+    httpGetAsync(manifestBase + "/client/config/app.json", function(data){
+        console.log("inside get http callback");
+        var manifest = JSON.stringify(newClientManifest(manifestBase, JSON.parse(data)));
+        console.log(manifestBase + "/app.json?manifest=" + manifest);
+        fin.desktop.Application.createFromManifest(manifestBase + "/app.json?manifest=" + encodeURI(manifest), function(app) {
+            app.run();
+          }, function(error) {
+            console.error('Failed to create app from manifest: ', error);
+          });
+    });  
 };
+
+var clientAppNo = 0;
+function newClientManifest(target, manifest){
+    clientAppNo++;
+    manifest.startup_app.url = target + "/client/index.html";
+    manifest.startup_app.uuid = "ClientApp" + clientAppNo;
+    manifest.startup_app.name = "Client App "+ clientAppNo;
+    manifest.startup_app.applicationIcon = target + "/client/favicon.ico";
+    manifest.shortcut = target + "/client/favicon.ico";
+    return manifest;
+};
+
+function httpGetAsync(theUrl, callback){
+    var xmlHttp = new XMLHttpRequest();
+    xmlHttp.onreadystatechange = function() { 
+        if (xmlHttp.readyState == 4 && xmlHttp.status == 200)
+            callback(xmlHttp.responseText);
+    }
+    xmlHttp.open("GET", theUrl, true); // true for asynchronous 
+    xmlHttp.send(null);
+}
